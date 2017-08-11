@@ -6,6 +6,17 @@ function __construct()
 {
 parent::__construct();
 }
+
+
+function login_page()
+{
+    $data['view_file'] = "view";
+    $this->load->module('templates');
+    $this->templates->pulic_bootstrap($data);
+}
+
+
+
 //Update Password Account
 function update_pword()
 {

@@ -7,6 +7,18 @@ function __construct()
 parent::__construct();
 }
 
+function _check_admin_login_details($username, $pword){
+
+	$target_username = "amdin";
+	$target_pass	= "password";
+
+	if (($username==$target_username) && ($pword==$target_pass)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
 function _hash_string($str){
 	$hash_string = password_hash($str, PASSWORD_BCRYPT, array(
 		'cost' => 11
