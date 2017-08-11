@@ -44,6 +44,13 @@ if (is_numeric($update_id))
 					<form class="form-horizontal" method="post" action="<?= $form_location ?>">
 						<fieldset>
 							<div class="control-group">
+								<label class="control-label" for="typeahead">UserName</label>
+								<div class="controls">
+									<input type="text" class="span4 form-control" name="username" value="<?= $username ?>">
+									<?php echo form_error('username','<p style="color:red; display:inline-block;">','</p>'); ?>
+								</div>
+							</div>
+							<div class="control-group">
 								<label class="control-label" for="typeahead"> First Name</label>
 								<div class="controls">
 									<input type="text" class="span4 form-control" name="firstname" value="<?= $firstname ?>">

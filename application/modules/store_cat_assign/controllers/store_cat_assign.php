@@ -54,11 +54,9 @@ function submit($item_id)
             $data['item_id'] = $item_id;
             $data['cat_id'] = $cat_id;
             $this->_insert($data);
-
             $this->load->module('store_categories');
             $cat_title = $this->store_categories->_get_cat_title($cat_id);
-
-            $flash_msg = "The item was add to ".$cat_title." category seuccessfully!";
+            $flash_msg = "The item was Add to ".$cat_title." category seuccessfully!";
             $value = '<div class="alert alert-success" role="alert">'.$flash_msg.'</div>';
             $this->session->set_flashdata('item', $value);
         }

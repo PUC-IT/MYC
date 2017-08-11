@@ -7,15 +7,51 @@ function __construct()
 parent::__construct();
 }
 
-function _draw_top_nav(){
-    $mysql_query = "select * from store_categories where parent_cat_id=0 order_by priority";
-    $query = $this->_custom_query($mysql_query);
+function view($update_id)
+{
+    if (!is_numeric($update_id))
+    {
+        redirect('site_security/not_allowed');
+    }
+
+    //fetch item detail
+    $data = $this->fetch_data_from_db($update_id);
+    $data['update_id'] = $update_id;
+    $data['flash'] = $this->session->flashdata('item');
+    $data['view_module'] = "store_categories";
+    $data['view_file'] = "view";
+    $this->load->module('templates');
+    $this->templates->public_bootstrap($data);
+}
+
+function _get_cat_id_from_cat_url($cat_url)
+{
+    $query = $this->get_where_custom('cat_url', $cat_url);
     foreach ($query->result() as $row) {
+        $cat_id = $row->id;
+    }
+    if (!isset($cat_id)) {
+        $cat_id = 0;
+    }
+    return $cat_id;
+}
+
+function _draw_top_nav(){
+    $mysql_query = "select * from store_categories where parent_cat_id=0 order by priority";
+    $query = $this->_custom_query($mysql_query);
+    foreach ($query->result() as $row)
+    {
         $parent_categories[$row->id] = $row->cat_title;
     }
+
+    $this->load->module('site_setting');
+    $items_segments = $this->site_setting->_get_cat_segments();
+    $data['target_url_start'] = base_url().$items_segments;
     $data['parent_categories'] = $parent_categories;
     $this->load->view('top_nav', $data);
 }
+
+
 
 function _get_dropdown_options($update_id)
 {
@@ -69,7 +105,6 @@ function sort()
 function _draw_sortable_list($parent_cat_id){
     $mysql_query = "select * from store_categories where parent_cat_id=$parent_cat_id order by priority";
     $data['query'] = $this->_custom_query($mysql_query);
-    //$data['query'] = $this->get_where_custom('parent_cat_id', $parent_cat_id);
     $this->load->view('sortable_list', $data);
 }
 
@@ -93,7 +128,6 @@ function fetch_data_from_post()
     $data['cat_title'] = $this->input->post('cat_title', TRUE);
     $data['parent_cat_id'] = $this->input->post('parent_cat_id', TRUE);
     return $data;
-
 }
 
 function fetch_data_from_db($update_id)
@@ -106,6 +140,7 @@ function fetch_data_from_db($update_id)
     foreach ($query->result() as $row) 
     {
         $data['cat_title'] = $row->cat_title;
+        $data['cat_url'] = $row->cat_url;
         $data['parent_cat_id'] = $row->parent_cat_id;
     }
     if (!isset($data))
@@ -140,6 +175,7 @@ function create()
         {
             //get the variables
             $data = $this->fetch_data_from_post();
+            $data['cat_url'] = url_title($data['cat_title']);
 
             if (is_numeric($update_id))
             {
@@ -200,6 +236,8 @@ function manage()
     if (!is_numeric($parent_cat_id)) {
         $parent_cat_id=0;
     }
+
+    
     $data['sort_this'] = TRUE;
     $data['parent_cat_id'] = $parent_cat_id;
     $data['flash'] = $this->session->flashdata('item');
@@ -294,5 +332,13 @@ function _custom_query($mysql_query)
     $query = $this->mdl_store_categories->_custom_query($mysql_query);
     return $query;
 }
-
+// FIX cat_title into cat_url
+// function fix(){   
+//     $query = $this->get('id');
+//     foreach ($query->result() as $row) {
+//         $data['cat_url'] = url_title($row->cat_title);
+//         $this->_update($row->id, $data);
+//     }
+//     echo "all done bro";
+// }
 }

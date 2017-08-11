@@ -59,7 +59,7 @@ if (is_numeric($update_id))
 						<div class="control-group">
 							<label class="control-label" for="typeahead">Item Title </label>
 							<div class="controls">
-								<input type="text" class="span6" name="item_title" value="<?= $item_title ?>">
+								<input type="text" class="span6" name="item_title" value="<?= $item_title ?>" requier="">
 								<?php echo form_error('item_title','<p style="color:red; display:inline-block;">','</p>'); ?>
 							</div>
 						</div>

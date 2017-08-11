@@ -70,6 +70,7 @@ function create()
     {
         //process the form
         $this->load->library('form_validation');
+        $this->form_validation->set_rules('username', 'UserName', 'required');
         $this->form_validation->set_rules('firstname', 'First Name', 'required');
        
 
@@ -84,7 +85,7 @@ function create()
                 $this->_update($update_id, $data);
                 $flash_msg = "The account detail was seuccessfully Updated!";
                 $value = '<div class="alert alert-success" role="alert">'.$flash_msg.'</div>';
-                $this->session->set_flashdata('account', $value);
+                $this->session->set_flashdata('item', $value);
                 redirect('store_accounts/create/'.$update_id);
             }
             else 
@@ -95,7 +96,7 @@ function create()
                 $update_id = $this->get_max();
                 $flash_msg = "The Account was seuccessfully added!";
                 $value = '<div class="alert alert-success" role="alert">'.$flash_msg.'</div>';
-                $this->session->set_flashdata('account', $value);
+                $this->session->set_flashdata('item', $value);
                 redirect('store_accounts/create/'.$update_id);
             }
         }
@@ -119,7 +120,7 @@ function create()
     }
 
     $data['update_id'] = $update_id;
-    $data['flash'] = $this->session->flashdata('account');    
+    $data['flash'] = $this->session->flashdata('item');    
     $data['view_file'] = "create";
     $this->load->module('templates');
     $this->templates->admin($data);
@@ -131,7 +132,7 @@ function manage()
 {
     $this->load->module('site_security');
     $this->site_security->_make_sure_is_admin();
-    $data['flash'] = $this->session->flashdata('account');
+    $data['flash'] = $this->session->flashdata('item');
     $data['query'] = $this->get('');
     $data['view_file'] = "manage";
     $this->load->module('templates');
@@ -141,6 +142,7 @@ function manage()
 
 function fetch_data_from_post()
 {
+    $data['username'] = $this->input->post('username', TRUE);
     $data['firstname'] = $this->input->post('firstname', TRUE);
     $data['lastname'] = $this->input->post('lastname', TRUE);
     $data['company'] = $this->input->post('company', TRUE);
@@ -166,6 +168,7 @@ function fetch_data_from_db($update_id)
     $query = $this->get_where($update_id);
     foreach ($query->result() as $row) 
     {
+        $data['username'] = $row->username;
         $data['firstname'] = $row->firstname;
         $data['lastname'] = $row->lastname;
         $data['company'] = $row->company;

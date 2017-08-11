@@ -46,7 +46,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<a class="brand" href="index.html"><span>Cshop</span></a>
+					<a class="brand" href="index.html"><span>Home</span></a>
 					
 					<!-- start: Header Menu -->
 					<div class="nav-no-collapse header-nav">
@@ -180,7 +180,7 @@
 							<li><a href="<?= base_url()?>store_categories/manage"><i class="icon-tasks"></i><span class="hidden-tablet"> Manage Categories</span></a></li>
 							<li><a href="<?= base_url()?>store_accounts/manage"><i class="icon-briefcase"></i><span class="hidden-tablet"> Manage Accounts</span></a></li>
 							
-							<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> Blog Page</span></a></li>
+							<li><a href="<?= base_url()?>webpages/manage"><i class="icon-eye-open"></i><span class="hidden-tablet"> CMS Blog</span></a></li>
 							<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>
 							<li>
 								<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span class="label label-important"> 3 </span></a>

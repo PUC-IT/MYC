@@ -9,7 +9,17 @@ $this->load->library('form_validation');
 $this->form_validation->CI =& $this;
 }
 
-
+function _get_item_id_from_item_url($item_url)
+{
+    $query = $this->get_where_custom('item_url', $item_url);
+    foreach ($query->result() as $row) {
+        $item_id = $row->id;
+    }
+    if (!isset($item_id)) {
+        $item_id = 0;
+    }
+    return $item_id;
+}
 
 function view($update_id)
 {
@@ -20,8 +30,9 @@ function view($update_id)
 
     //fetch item detail
     $data = $this->fetch_data_from_db($update_id);
-
     $data['update_id'] = $update_id;
+    $data['flash'] = $this->session->flashdata('item');
+    $data['view_module'] = "store_items";
     $data['view_file'] = "view";
     $this->load->module('templates');
     $this->templates->public_bootstrap($data);

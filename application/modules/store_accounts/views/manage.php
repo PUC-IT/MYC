@@ -25,6 +25,7 @@ if (isset($flash))
 			<table class="table table-striped table-bordered bootstrap-datatable datatable">
 				<thead>
 					<tr>
+						<th>Userame</th>
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Company</th>
@@ -42,6 +43,7 @@ if (isset($flash))
 						$date_created = $this->timedate->get_nice_date($row->date_made, 'cool');
 					?>
 					<tr>
+						<td><?= $row->username ?></td>
 						<td><?= $row->firstname ?></td>
 						<td class="center"><?= $row->lastname ?></td>
 						<td class="center"><?= $row->company ?></td>

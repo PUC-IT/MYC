@@ -10,6 +10,7 @@ if (isset($flash))
 		<div class="box span12">
 			<div class="box-header" data-original-title>
 				<h2><i class="halflings-icon white edit"></i><span class="break"></span>Add New Category</h2>
+				<a href="<?= base_url()?>store_categories/manage" style="color: #fff; text-decoration-line: none;"><span class="break">    Back</span></a>
 				<div class="box-icon">
 					<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
 					<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
@@ -34,7 +35,7 @@ if (isset($flash))
 						</div>
 						<?php 
 						} else{
-							echo form_hidden('parent_cat_id', 1);
+							echo form_hidden('parent_cat_id', 0);
 						}
 						?>
 
