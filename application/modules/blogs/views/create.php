@@ -17,7 +17,7 @@ if (isset($flash))
 				</div>
 				<div class="box-content">
 					<?php
-						$form_location = base_url()."webpages/create/".$update_id;
+						$form_location = base_url()."blogs/create/".$update_id;
 					?>
 					<form class="form-horizontal" method="post" action="<?= $form_location ?>">
 						<fieldset>
@@ -79,10 +79,10 @@ if (is_numeric($update_id))
 		<div class="box-content">
 			<?php
 			if ($update_id>2){?>
-			<a href="<?= base_url() ?>webpages/deleteconf/<?= $update_id ?>"><button type="button" class="btn btn-danger">Delete Item</button></a>
+			<a href="<?= base_url() ?>blogs/deleteconf/<?= $update_id ?>"><button type="button" class="btn btn-danger">Delete Item</button></a>
 			<?php }?>
 
-			<a href="<?= base_url() ?>webpages/view/<?= $update_id ?>"  target="blank;"><button type="button" class="btn btn-defualt">View Item on Shop</button></a>
+			<a href="<?= base_url() ?>blogs/view/<?= $update_id ?>"  target="blank;"><button type="button" class="btn btn-defualt">View Item on Shop</button></a>
 		</div>
 	</div><!--/span-->
 </div><!--/row-->

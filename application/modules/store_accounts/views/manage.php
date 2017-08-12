@@ -25,7 +25,7 @@ if (isset($flash))
 			<table class="table table-striped table-bordered bootstrap-datatable datatable">
 				<thead>
 					<tr>
-						<th>Userame</th>
+						<th>Username</th>
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Company</th>

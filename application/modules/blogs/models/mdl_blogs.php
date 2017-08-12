@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Mdl_perfectmodel extends CI_Model
+class Mdl_blogs extends CI_Model
 
 {
 
@@ -10,7 +10,7 @@ parent::__construct();
 
 function get_table() 
 {
-    $table = "tablename";
+    $table = "blogs";
     return $table;
 }
 

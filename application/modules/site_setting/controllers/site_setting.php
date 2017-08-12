@@ -18,5 +18,9 @@ function _get_cat_segments(){
     return $segments;
 }
 
-
+function _get_page_not_found_msg(){
+	$msg = "<h1>It's a webpage Tola But not as we know it!</h1>";
+	$msg.= "<p>Please check your vibe and try again!</p>";
+	return $msg;
+}
 }

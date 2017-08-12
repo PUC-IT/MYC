@@ -1,5 +1,5 @@
 <?php
-class Webpages extends MX_Controller 
+class Blogs extends MX_Controller 
 {
 
 function __construct()
@@ -7,7 +7,19 @@ function __construct()
 parent::__construct();
 }
 
-
+function test()
+{
+    $this->load->module('timedate');
+    $nowtime = time();
+    $datepicker_time = $this->timedate->get_nice_date($nowtime, 'datepicker_us');
+    echo $datepicker_time;
+    echo "<hr>";
+    $timestamp = $this->timedate->make_timestamp_from_datepicker_us($datepicker_time);
+    echo $timestamp;
+    echo "<hr>";
+    $nice_time = $this->timedate->get_nice_date($timestamp, 'cool');
+    echo $nice_time;
+}
 function delete($update_id)
 {
     if (!is_numeric($update_id))
@@ -22,7 +34,7 @@ function delete($update_id)
     //Cancel button back to Create page
     if ($submit=="Cancel")
     {
-        redirect('webpages/create/'.$update_id);
+        redirect('blogs/create/'.$update_id);
     }
     elseif ($submit=="Yes - Delete Item")
     {
@@ -30,7 +42,7 @@ function delete($update_id)
         $flash_msg = "The item was seuccessfully Delete.";
         $value = '<div class="alert alert-success" role="alert">'.$flash_msg.'</div>';
         $this->session->set_flashdata('item', $value);
-        redirect('webpages/manage/');
+        redirect('blogs/manage/');
     }
 }
 
@@ -67,7 +79,7 @@ function create()
     //Cancel button back to Manage page
     if ($submit=="Cancel")
     {
-        redirect('webpages/manage');
+        redirect('blogs/manage');
     }
     if ($submit=="Submit")
     {
@@ -92,7 +104,7 @@ function create()
                 $flash_msg = "The Page detail was seuccessfully Updated!";
                 $value = '<div class="alert alert-success" role="alert">'.$flash_msg.'</div>';
                 $this->session->set_flashdata('item', $value);
-                redirect('webpages/create/'.$update_id);
+                redirect('blogs/create/'.$update_id);
             }
             else 
             {
@@ -102,7 +114,7 @@ function create()
                 $flash_msg = "The Page was seuccessfully added!";
                 $value = '<div class="alert alert-success" role="alert">'.$flash_msg.'</div>';
                 $this->session->set_flashdata('item', $value);
-                redirect('webpages/manage/'.$update_id);
+                redirect('blogs/manage/'.$update_id);
             }
         }
     }
@@ -175,8 +187,8 @@ function manage()
 
 function get($order_by)
 {
-    $this->load->model('mdl_webpages');
-    $query = $this->mdl_webpages->get($order_by);
+    $this->load->model('mdl_blogs');
+    $query = $this->mdl_blogs->get($order_by);
     return $query;
 }
 
@@ -186,8 +198,8 @@ function get_with_limit($limit, $offset, $order_by)
         die('Non-numeric variable!');
     }
 
-    $this->load->model('mdl_webpages');
-    $query = $this->mdl_webpages->get_with_limit($limit, $offset, $order_by);
+    $this->load->model('mdl_blogs');
+    $query = $this->mdl_blogs->get_with_limit($limit, $offset, $order_by);
     return $query;
 }
 
@@ -198,22 +210,22 @@ function get_where($id)
         die('Non-numeric variable!');
     }
 
-    $this->load->model('mdl_webpages');
-    $query = $this->mdl_webpages->get_where($id);
+    $this->load->model('mdl_blogs');
+    $query = $this->mdl_blogs->get_where($id);
     return $query;
 }
 
 function get_where_custom($col, $value) 
 {
-    $this->load->model('mdl_webpages');
-    $query = $this->mdl_webpages->get_where_custom($col, $value);
+    $this->load->model('mdl_blogs');
+    $query = $this->mdl_blogs->get_where_custom($col, $value);
     return $query;
 }
 
 function _insert($data)
 {
-    $this->load->model('mdl_webpages');
-    $this->mdl_webpages->_insert($data);
+    $this->load->model('mdl_blogs');
+    $this->mdl_blogs->_insert($data);
 }
 
 function _update($id, $data)
@@ -222,8 +234,8 @@ function _update($id, $data)
         die('Non-numeric variable!');
     }
 
-    $this->load->model('mdl_webpages');
-    $this->mdl_webpages->_update($id, $data);
+    $this->load->model('mdl_blogs');
+    $this->mdl_blogs->_update($id, $data);
 }
 
 function _delete($id)
@@ -232,28 +244,28 @@ function _delete($id)
         die('Non-numeric variable!');
     }
 
-    $this->load->model('mdl_webpages');
-    $this->mdl_webpages->_delete($id);
+    $this->load->model('mdl_blogs');
+    $this->mdl_blogs->_delete($id);
 }
 
 function count_where($column, $value) 
 {
-    $this->load->model('mdl_webpages');
-    $count = $this->mdl_webpages->count_where($column, $value);
+    $this->load->model('mdl_blogs');
+    $count = $this->mdl_blogs->count_where($column, $value);
     return $count;
 }
 
 function get_max() 
 {
-    $this->load->model('mdl_webpages');
-    $max_id = $this->mdl_webpages->get_max();
+    $this->load->model('mdl_blogs');
+    $max_id = $this->mdl_blogs->get_max();
     return $max_id;
 }
 
 function _custom_query($mysql_query) 
 {
-    $this->load->model('mdl_webpages');
-    $query = $this->mdl_webpages->_custom_query($mysql_query);
+    $this->load->model('mdl_blogs');
+    $query = $this->mdl_blogs->_custom_query($mysql_query);
     return $query;
 }
 

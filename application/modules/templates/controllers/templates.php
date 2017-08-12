@@ -10,7 +10,7 @@ parent::__construct();
 function test()
 {
     $data = "";
-    $this->admin($data);
+    $this->homepage_content($data);
 
 }
 
@@ -35,6 +35,15 @@ function admin($data)
 	}
     $this->load->view('admin', $data);
 }
+
+function homepage_content($data)
+{
+	if (!isset($data['view_module'])) {
+		$data['view_module'] = $this->uri->segment(1);
+	}
+    $this->load->view('homepage_content', $data);
+}
+
 }
 
 

@@ -1,6 +1,6 @@
 <h1>Content Management System</h1>
 <?php
-	$create_page_url = base_url()."webpages/create";
+	$create_page_url = base_url()."blogs/create";
 ?>
 <?php
 if (isset($flash))
@@ -34,9 +34,9 @@ if (isset($flash))
 					<?php
 					foreach ($query->result() as $row)
 					{ 
-						$edit_page_url = base_url()."webpages/create/".$row->id;
+						$edit_page_url = base_url()."blogs/create/".$row->id;
 						$view_page_url = base_url().$row->page_url;
-						$del_page_url = base_url()."webpages/deleteconf/".$row->id;
+						$del_page_url = base_url()."blogs/deleteconf/".$row->id;
 					?>
 					<tr>
 						<td class="col-md-4"><?= $view_page_url ?></td>

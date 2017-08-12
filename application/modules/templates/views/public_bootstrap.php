@@ -33,7 +33,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Home</a>
+          <a class="navbar-brand" href="<?= base_url() ?>">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
@@ -47,13 +47,21 @@
         </div>
       </nav>
 
-
+<hr>
       <div class="container" style="min-height: 450px;">
           <?php
-            if (isset($view_file))
-            {
+            if (isset($page_content)) {
+              echo nl2br($page_content);
+              if ($page_url=="") {
+                require_once('homepage_content.php');
+              } elseif ($page_url=="contact-us")
+              {
+               echo Modules::run('contact-us/_draw_form');
+              } 
+            } elseif (isset($view_file)) {
               $this->load->view($view_module.'/'.$view_file);
             }
+
           ?>
       </div>
       <hr>
