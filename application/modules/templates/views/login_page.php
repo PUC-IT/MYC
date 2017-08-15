@@ -55,42 +55,43 @@ $form_location = base_url().$first_bit.'/submit_login';
 				</div>
 			</nav>
 			<hr>
-      <div class="container" style="min-height: 450px;">
-         <h1>Create Account</h1>
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4 col-sm-offset-1">
-						<div class="login-form"><!--login form-->
-						<h2>Login to your account</h2>
-						<form action="<?= $form_location ?>" method="post">
-							<input type="text" name="username" value="<?= $username ?>" placeholder="Username or E-mail Address" id="inputtext"/>
-							<input type="password" name="pword" id="inputPassword" placeholder="Password" required/>
-							<span>
-							<?php
-							if ($first_bit=='youraccount') {?>
-								<input type="checkbox" class="checkbox" value="remember-me" name="remember"> Remember me
-							</span>
-							<?php }?>
-							<button type="submit" class="btn btn-default" name="submit" value="Submit">Login</button>
-						</form>
-						</div><!--/login form-->
-					</div>
-					<div class="col-sm-1">
-						<h2 class="or">OR</h2>
-					</div>
-					<div class="col-sm-4">
-						<div class="signup-form"><!--sign up form-->
-						<h2>New Customer ?</h2>
-            <p><strong>Register Account</strong></p>
-            <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
-            <a href="http://www.itcomputerkh.com/index.php?route=account/register" class="btn btn-primary">Continue</a></div>
-						</div><!--/sign up form-->
+			<div class="container" style="min-height: 450px;">
+				<h1>Create Account</h1>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-1">
+							<div class="login-form"><!--login form-->
+							<h2>Login to your account</h2>
+							<form action="<?= $form_location ?>" method="post">
+								<!-- <label class="control-label" for="input-email">Username or E-Mail Address</label> -->
+								<input type="text" name="username" value="<?= $username ?>" placeholder="Username or E-mail Address" id="inputtext"/>
+								<!-- <label class="control-label" for="input-email">Password</label> -->
+								<input type="password" name="pword" id="inputPassword" placeholder="Password" required/>
+								<span>
+									<?php
+									if ($first_bit=='youraccount') {?>
+									<input type="checkbox" class="checkbox" value="remember-me" name="remember"> Remember me
+								</span>
+								<?php }?>
+								<button type="submit" class="btn btn-default" name="submit" value="Submit">Login</button>
+							</form>
+							</div><!--/login form-->
+						</div>
+						<div class="col-sm-1">
+							<h2 class="or">OR</h2>
+						</div>
+						<div class="col-sm-4">
+							<div class="signup-form"><!--sign up form-->
+							<h2>New Customer ?</h2>
+							<p><strong>Register Account</strong></p>
+							<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
+							<a href="<?= base_url().'youraccount/start/' ?>" class="btn btn-primary">Create Account Now</a>
+							</div><!--/sign up form-->
+						</div>
 					</div>
 				</div>
 			</div>
-
-      </div>
-      <hr>
+			<hr>
 			
 			<div class="container">
 				<footer>

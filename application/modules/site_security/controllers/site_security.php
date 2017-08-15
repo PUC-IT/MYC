@@ -25,11 +25,24 @@ function test(){
 	$length = 30;
 	echo $this->generate_random_string($length);
 }
-
+function _make_sure_logged_in(){
+	$user_id = $this->_get_user_id();
+	if (!is_numeric($user_id)) {
+		redirect('youraccount/login');
+	}
+}
 
 function _get_user_id()
 {
 	//attempt to get The User ID
+
+	//start by checking for a session variable
+	$user_id = $this->session->userdata('user_id');
+	if (!is_numeric($user_id)) {
+		$this->load->module('site_cookies');
+		$user_id = $this->site_cookies->_attempt_get_user_id();
+	}
+	return $user_id;
 }
 
 function generate_random_string($length)

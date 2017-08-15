@@ -50,8 +50,8 @@ function logout()
 
 function welcome()
 {
-    //$this->load->module('site_security');
-    //$this->site_security->_make_sure_logged_in();
+    $this->load->module('site_security');
+    $this->site_security->_make_sure_logged_in();
 
     $data['flash'] = $this->session->flashdata('item');
     $data['view_file'] = "welcome";
@@ -87,8 +87,15 @@ $submit = $this->input->post('submit', TRUE);
             foreach ($query->result() as $row) {
                 $user_id = $row->id;
             }
+
+            $remember = $this->input->post('remember', TRUE);
+            if ($remember=="remember-me") {
+                $login_type = "longterm";
+            } else {
+                $login_type = "shortterm";
+            }
             //send them to somewhere.
-            $this->_in_you_here($user_id);
+            $this->_in_you_here($user_id, $login_type);
         } else {
             echo validation_errors();
 
@@ -97,9 +104,16 @@ $submit = $this->input->post('submit', TRUE);
 
 }
 
-function _in_you_here($user_id)
+function _in_you_here($user_id, $login_type)
 {
-    echo "Sending user $user_id to the private area";
+    if ($login_type=="longterm") {
+        $this->load->module('site_cookies');
+        $this->site_cookies->_set_cookie($user_id);
+    } else {
+        $this->session->set_userdata('user_id', $user_id);
+    }
+    //Sending user $user_id to the Welcome area
+    redirect('youraccount/welcome');
 }
 
 function submit()

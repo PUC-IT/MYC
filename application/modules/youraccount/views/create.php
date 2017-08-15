@@ -6,17 +6,6 @@ $form_location = base_url().'youraccount/submit';
 <div class="container">
   <div class="row">
     <div class="col-sm-4 col-sm-offset-1">
-      <div class="login-form"><!--login form-->
-      <h2>Login to your account</h2>
-        If you already have an account with us, please login at the login page.
-      </div><!--/login form-->
-    </div>
-
-    <div class="col-sm-1">
-      <h2 class="or">OR</h2>
-    </div>
-
-    <div class="col-sm-4">
       <div class="signup-form"><!--sign up form-->
       <h2>New User Signup!</h2>
       <form action="<?= $form_location ?>" method="post">
@@ -31,6 +20,16 @@ $form_location = base_url().'youraccount/submit';
       </form>
       </div><!--/sign up form-->
     </div>
+        <div class="col-sm-1">
+      <h2 class="or">OR</h2>
+    </div>
+    <div class="col-sm-4">
+      <div class="login-form"><!--login form-->
+      <h2>Login to your account</h2>
+        <p>If you already have an account with us, please login at the login page.</p>
+        <a href="<?= base_url().'youraccount/login/' ?>" class="btn btn-primary">Login Now</a>
+      </div><!--/login form-->
+    </div>    
   </div>
 </div>
 
