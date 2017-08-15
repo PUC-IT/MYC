@@ -71,7 +71,7 @@ if ($num_rows>0) { ?>
 						$delete_url = base_url()."store_cat_assign/delete/".$row->id;
 						$parent_cat_title = $this->store_categories->_get_parent_cat_title($row->cat_id);
 						$cate_title = $this->store_categories->_get_cat_title($row->id);
-						$long_cat_title = $parent_cat_title."> ".$cate_title;
+						$long_cat_title = $parent_cat_title." > ".$cate_title;
 					?>
 					<tr>
 						<td><?= $count ?></td>

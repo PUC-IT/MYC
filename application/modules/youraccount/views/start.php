@@ -8,14 +8,7 @@ $form_location = base_url().'youraccount/submit';
     <div class="col-sm-4 col-sm-offset-1">
       <div class="login-form"><!--login form-->
       <h2>Login to your account</h2>
-      <form action="" method="post">
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <span>
-          <input type="checkbox" class="checkbox" value="remember-me"> Remember me
-        </span>
-        <!-- <button type="submit" class="btn btn-default" name="signup" value="Signup">Login</button> -->
-      </form>
+        If you already have an account with us, please login at the login page.
       </div><!--/login form-->
     </div>
 

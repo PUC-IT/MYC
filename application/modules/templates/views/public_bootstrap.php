@@ -22,6 +22,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/prettyPhoto.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/price-range.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/animate.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/responsive.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -41,12 +47,22 @@
           echo Modules::run('store_categories/_draw_top_nav');
           ?>
 
-
-          
+        
+          <?php echo anchor('youraccount/start', 'Create Account'); ?>
           </div><!--/.navbar-collapse -->
         </div>
       </nav>
-
+<!-- <div class="col-sm-8">
+            <div class="shop-menu pull-right">
+              <ul class="nav navbar-nav">
+                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                <li><a href="<?= base_url() ?>youraccount/login/"><i class="fa fa-lock"></i> Login</a></li>
+              </ul>
+            </div>
+          </div> -->
 <hr>
       <div class="container" style="min-height: 450px;">
           <?php

@@ -27,6 +27,7 @@ if (isset($flash))
 		<?php
 			echo Modules::run('store_categories/_draw_sortable_list', $parent_cat_id);
 		?>
+		
 
 		</div>
 	</div>

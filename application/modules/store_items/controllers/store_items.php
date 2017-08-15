@@ -51,8 +51,8 @@ function _process_delete($update_id)
     $data = $this->fetch_data_from_db($update_id);
     $big_pic = $data['big_pic'];
     $small_pic = $data['small_pic'];
-    $big_pic_path = './assets/images/big_pics/'.$big_pic;
-    $small_pic_path = './assets/images/small_pics/'.$small_pic;
+    $big_pic_path = './big_pics/'.$big_pic;
+    $small_pic_path = './small_pics/'.$small_pic;
     
     if (file_exists($big_pic_path))
     {
@@ -143,8 +143,8 @@ function delete_image($update_id)
     $data = $this->fetch_data_from_db($update_id);
     $big_pic = $data['big_pic'];
     $small_pic = $data['small_pic'];
-    $big_pic_path = './assets/images/big_pics/'.$big_pic;
-    $small_pic_path = './assets/images/small_pics/'.$small_pic;
+    $big_pic_path = './big_pics/'.$big_pic;
+    $small_pic_path = './small_pics/'.$small_pic;
     
     if (file_exists($big_pic_path))
     {
@@ -171,9 +171,9 @@ function delete_image($update_id)
 function _generate_thumbnail($file_name)
 {
     $config['image_library'] = 'gd2';
-    $config['source_image'] = './assets/images/big_pics/'.$file_name;
-    $config['new_image'] = './assets/images/small_pics/'.$file_name;
-    $config['create_thumb'] = TRUE;
+    $config['source_image'] = './big_pics/'.$file_name;
+    $config['new_image'] = './small_pics/'.$file_name;
+    //$config['create_thumb'] = TRUE;
     $config['maintain_ratio'] = TRUE;
     $config['width']         = 200;
     $config['height']       = 200;
@@ -200,7 +200,7 @@ function do_upload($update_id)
         redirect('store_items/create/'.$update_id);
     }
     
-    $config['upload_path']          = './assets/images/big_pics/';
+    $config['upload_path']          = './big_pics/';
     $config['allowed_types']        = 'gif|jpg|png';
     $config['max_size']             = 2048;
     $config['max_width']            = 2024;
@@ -208,7 +208,7 @@ function do_upload($update_id)
 
     $this->load->library('upload', $config);
 
-    if ( ! $this->upload->do_upload('userfile'))
+    if (!$this->upload->do_upload('userfile'))
     {
         $data['error'] = array('error' => $this->upload->display_errors('<p style="color:red; display:inline-block;">', '</p>'));      
         $data['headline'] = "Upload Error";

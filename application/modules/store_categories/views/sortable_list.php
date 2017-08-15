@@ -25,7 +25,10 @@
 	?>
 	<li class="sort" id="<?= $row->id ?>"><i class="icon-sort"></i><?= $row->cat_title ?>
 	<?= $parent_cat_title ?>
-
+	
+<a class="btn btn-info" href="<?= $edit_item_url ?>">
+			<i class="halflings-icon white edit"></i>
+		</a>
 		<?php if ($num_sub_cats<1) {
 			echo "&nbsp;";
 		} else{

@@ -1,5 +1,5 @@
 <?php
-class Musical extends MX_Controller 
+class Product extends MX_Controller 
 {
 
 function __construct()
@@ -7,7 +7,7 @@ function __construct()
 parent::__construct();
 }
 
-function instrument(){
+function items(){
     //figure out what the item id is
     $item_url = $this->uri->segment(3);
     $this->load->module('store_items');

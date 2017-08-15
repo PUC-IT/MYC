@@ -13,6 +13,12 @@
 		<!-- end: Mobile Specific -->
 		
 		<!-- start: CSS -->
+		<link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
+	    <link href="<?php echo base_url(); ?>assets/css/prettyPhoto.css" rel="stylesheet">
+	    <link href="<?php echo base_url(); ?>assets/css/price-range.css" rel="stylesheet">
+	    <link href="<?php echo base_url(); ?>assets/css/animate.css" rel="stylesheet">
+	    <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet">
+    	<link href="<?php echo base_url(); ?>assets/css/responsive.css" rel="stylesheet">
 		<link id="bootstrap-style" href="<?php echo base_url(); ?>admin/css/bootstrap.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(); ?>admin/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<link id="base-style" href="<?php echo base_url();?>admin/css/style.css" rel="stylesheet">

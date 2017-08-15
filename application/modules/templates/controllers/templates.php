@@ -14,6 +14,13 @@ function test()
 
 }
 
+function login($data){
+	if (!isset($data['view_module'])) {
+		$data['view_module'] = $this->uri->segment(1);
+	}
+	$this->load->view('login_page', $data);
+}
+
 function public_bootstrap($data)
 {
 	if (!isset($data['view_module'])) {

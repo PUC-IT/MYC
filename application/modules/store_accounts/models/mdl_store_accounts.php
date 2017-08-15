@@ -47,6 +47,15 @@ function get_where_custom($col, $value)
     return $query;
 }
 
+function get_with_double_condition($col1, $value1, $col2, $value2) 
+{
+    $table = $this->get_table();
+    $this->db->where($col1, $value1);
+    $this->db->or_where($col2, $value2);
+    $query=$this->db->get($table);
+    return $query;
+}
+
 function _insert($data)
 {
     $table = $this->get_table();

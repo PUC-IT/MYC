@@ -14,8 +14,29 @@ function view($update_id)
         redirect('site_security/not_allowed');
     }
 
-    //fetch item detail
+    $this->load->module('site_setting');
+
+    //fetch category detail
     $data = $this->fetch_data_from_db($update_id);
+
+    //fetch item blong to category
+    $mysql_query = "
+    SELECT
+store_items.item_title,
+store_items.item_url,
+store_items.item_price,
+store_items.big_pic,
+store_items.small_pic
+FROM
+store_cat_assign
+INNER JOIN store_items ON store_cat_assign.item_id = store_items.id
+WHERE
+ store_cat_assign.cat_id=$update_id and store_items.status=1
+    ";
+
+    $data['item_segments'] = $this->site_setting->_get_items_segments();
+    $data['dollar_symbol'] = $this->site_setting->_get_dollar_symbol();
+    $data['query'] = $this->_custom_query($mysql_query);
     $data['update_id'] = $update_id;
     $data['flash'] = $this->session->flashdata('item');
     $data['view_module'] = "store_categories";

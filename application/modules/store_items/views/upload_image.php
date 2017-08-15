@@ -29,7 +29,7 @@ if (isset($flash))
 			<p style="margin-top: 25px;">Please choose a file from you computer then press 'Upload'.</p>
 			<fieldset>
 				
-				<div class="control-group">
+				<div class="control-group" style="height: 200px;">
 					<label class="control-label" for="fileInput">File input</label>
 					<div class="controls">
 						<input type="file" class="input-file uniform_on" id="fileInput" name="userfile">

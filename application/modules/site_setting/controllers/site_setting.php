@@ -7,14 +7,19 @@ function __construct()
 parent::__construct();
 }
 
+function _get_dollar_symbol(){
+    //return the segment for the store_items pages (product url)
+    $symbol = "&dollar;";
+    return $symbol;
+}
 function _get_items_segments(){
     //return the segment for the store_items pages (product url)
-    $segments = "musical/instrument/";
+    $segments = "product/items";
     return $segments;
 }
 function _get_cat_segments(){
     //return the segment for the store_items pages (product url)
-    $segments = "song/instrument/";
+    $segments = "category/product/";
     return $segments;
 }
 

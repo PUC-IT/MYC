@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-5" style="margin-top: 25px;">
-		<img src="<?= base_url() ?>assets/images/big_pics/<?= $big_pic ?>" class="img-responsive" alt="Responsive image">
+		<img src="<?= base_url() ?>big_pics/<?= $big_pic ?>" class="img-responsive" alt="Responsive image">
 	</div>
 	<div class="col-md-4">
 		<h1><?= $item_title ?></h1>

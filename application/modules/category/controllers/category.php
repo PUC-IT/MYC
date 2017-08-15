@@ -1,5 +1,5 @@
 <?php
-class song extends MX_Controller 
+class Category extends MX_Controller 
 {
 
 function __construct()
@@ -7,7 +7,7 @@ function __construct()
 parent::__construct();
 }
 
-function instrument(){
+function product(){
     //figure out what the category id is
     $cat_url = $this->uri->segment(3);
     $this->load->module('store_categories');

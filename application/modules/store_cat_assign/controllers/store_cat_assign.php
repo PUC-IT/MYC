@@ -78,11 +78,12 @@ function update($item_id)
 
     //get an array of all sub cats on the site
     $this->load->module('store_categories');
-    $sub_categories = $this->store_categories->_get_all_sub_cats_for_dropdown();
-    // $query = $this->store_categories->get_where_custom('parent_cat_id !=', '0');
-    // foreach ($query->result() as $row) {
-    //     $sub_categories[$row->id] = $row->cat_title;
-    // }
+    
+    $query = $this->store_categories->get_where_custom('parent_cat_id !=', '0');
+    foreach ($query->result() as $row) {
+        $sub_categories[$row->id] = $row->cat_title;
+        $sub_categories = $this->store_categories->_get_all_sub_cats_for_dropdown();
+    }
 
     //get an array of all assign cates
     $query = $this->get_where_custom('item_id', $item_id);
