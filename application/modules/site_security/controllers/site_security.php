@@ -7,6 +7,8 @@ function __construct()
 parent::__construct();
 }
 
+
+
 function _check_admin_login_details($username, $pword){
 
 	$target_username = "amdin";
@@ -17,6 +19,27 @@ function _check_admin_login_details($username, $pword){
 	} else {
 		return FALSE;
 	}
+}
+
+function test(){
+	$length = 30;
+	echo $this->generate_random_string($length);
+}
+
+
+function _get_user_id()
+{
+	//attempt to get The User ID
+}
+
+function generate_random_string($length)
+{
+	$characters = '23456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+	$randomString = '';
+	for ($i=0; $i < $length ; $i++) { 
+		$randomString .= $characters[rand(0, strlen($characters) -1)];
+	}
+	return $randomString;
 }
 
 function _hash_string($str){

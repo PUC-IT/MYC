@@ -5,31 +5,84 @@ class Youraccount extends MX_Controller
 function __construct()
 {
 parent::__construct();
-// $this->load->library('form_validation');
-// $this->form_validation->CI =& $this;
+}
+
+function test1()
+{
+    $your_name = "CHOU";
+    $this->session->set_userdata('your_name', $your_name);
+    echo "The session variable was set.";
+
+    echo "<hr>";
+    echo anchor('youraccount/test2', 'Get session')."<br>";
+    echo anchor('youraccount/test3', 'Delete session')."<br>";
+}
+function test2()
+{
+    $your_name = $this->session->userdata('your_name');
+    if ($your_name!="") {
+        echo "<h1>Hello $your_name</h1>";
+    } else {
+        echo "No session variable has been set yet";
+    }
+    echo "<hr>";
+    echo anchor('youraccount/test1', 'Set session')."<br>";
+    echo anchor('youraccount/test3', 'Delete session')."<br>";
+}
+function test3()
+{
+    $this->session->unset_userdata('your_name');
+    //unset($_SESSION['your_name']);
+    echo "UNSET";
+
+    echo "<hr>";
+    echo anchor('youraccount/test1', 'Set session')."<br>";
+    echo anchor('youraccount/test2', 'Get session')."<br>";
+}
+
+function logout()
+{
+    unset($_SESSION['user_id']);
+    $this->load->module('site_cookies');
+    $this->site_cookies->_destroy_cookie();
+    redirect(base_url());
+}
+
+function welcome()
+{
+    //$this->load->module('site_security');
+    //$this->site_security->_make_sure_logged_in();
+
+    $data['flash'] = $this->session->flashdata('item');
+    $data['view_file'] = "welcome";
+    $this->load->module('templates');
+    $this->templates->public_bootstrap($data);
 }
 
 function login(){
-    $data['view_file'] = "view";
+    $data['username'] = $this->input->post('username', TRUE);
+    
     $this->load->module('templates');
     $this->templates->login($data);
 }
 
 function submit_login()
 {
-$submit_login = $this->input->post('submit', TRUE);
-    if ($submit_login=="Submit")
+$submit = $this->input->post('submit', TRUE);
+    if ($submit=="Submit")
     {        
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'Username', 'required|min_length[2]|max_length[60]|callback_username_check');
+        $this->form_validation->CI =& $this;
+
+        $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[60]|callback_username_check');
         $this->form_validation->set_rules('pword', 'Password', 'required|min_length[4]|max_length[35]');
         if ($this->form_validation->run() == TRUE)
         {
             //figure out the user_id
             $col1 = 'username';
             $value1 = $this->input->post('username', TRUE);
-            $col1 = 'email';
-            $value1 = $this->input->post('username', TRUE);
+            $col2 = 'email';
+            $value2 = $this->input->post('email', TRUE);
             $query = $this->store_accounts->get_with_double_condition($col1, $value1, $col2, $value2);
             foreach ($query->result() as $row) {
                 $user_id = $row->id;
@@ -38,9 +91,15 @@ $submit_login = $this->input->post('submit', TRUE);
             $this->_in_you_here($user_id);
         } else {
             echo validation_errors();
+
         }
     }
 
+}
+
+function _in_you_here($user_id)
+{
+    echo "Sending user $user_id to the private area";
 }
 
 function submit()
@@ -49,8 +108,8 @@ $submit = $this->input->post('submit', TRUE);
     if ($submit=="Submit")
     {        
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'Username', 'required|min_length[2]|max_length[60]|is_unique[store_accounts.username]');
-        $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|max_length[120]|is_unique[store_accounts.email]');
+        $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[12]|is_unique[store_accounts.username]');
+        $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|max_length[120]');
         $this->form_validation->set_rules('pword', 'Password', 'required|min_length[4]|max_length[35]');
         $this->form_validation->set_rules('repeat_pword', 'Repeat Password', 'required|matches[pword]');
 
@@ -60,6 +119,7 @@ $submit = $this->input->post('submit', TRUE);
         	echo "<h1>Account has been Created!</h1>";
         	echo "<p>Please login!</p>";
         	die();
+            
         } else {
         	$this->start();
         }
@@ -78,13 +138,14 @@ function _process_create_account()
     $data['pword'] = $this->site_security->_hash_string($pword); //strong password
     $this->store_accounts->_insert($data);
 
+
 }
 
 function start()
 {
 	$data = $this->fetch_data_from_post();
     $data['flash'] = $this->session->flashdata('item');    
-    $data['view_file'] = "start";
+    $data['view_file'] = "create";
     $this->load->module('templates');
     $this->templates->public_bootstrap($data);
 }
@@ -99,36 +160,36 @@ function fetch_data_from_post()
 }
 
 
-// function username_check($str)
-// {
-//     $this->load->module('store_accounts');
-//     $this->load->module('site_security');
+function username_check($str)
+{
+    $this->load->module('store_accounts');
+    $this->load->module('site_security');
 
-//     $error_msg = "You did not enter the correct username or/and password";
+    $error_msg = "You did not enter the correct username or/and password";
 
-//     $col1 = 'username';
-//     $value1 = $str;
-//     $col1 = 'email';
-//     $value1 = $str;
-//     $query = $this->store_accounts->get_with_double_condition($col1, $value1, $col2, $value2);
-//     $num_rows = $query->num_rows();
+    $col1 = 'username';
+    $value1 = $str;
+    $col2 = 'email';
+    $value2 = $str;
+    $query = $this->store_accounts->get_with_double_condition($col1, $value1, $col2, $value2);
+    $num_rows = $query->num_rows();
 
-//     if($num_rows<1)
-//     {
-//         $this0->form_validation->set_message('username_check', $error_msg);
-//         return FALSE;
-//     }
-//     foreach ($query->result() as $row) {
-//         $pword_on_table = $row->pword;
-//     }
-//     $pword = $this->input->post('pword', TRUE);
-//     $result = $this->site_security->_verify_hash($pword, $pword_on_table);
+    if($num_rows<1) {
+        $this->form_validation->set_message('username_check', $error_msg);
+        return FALSE;
+    }
 
-//     if ($result==TRUE) {
-//         return TRUE;
-//     } else {
-//         $this->form_validation->set_message('username_check', $error_msg);
-//     }
-// }
+    foreach ($query->result() as $row) {
+        $pword_on_table = $row->pword;
+    }
+    $pword = $this->input->post('pword', TRUE);
+    $result = $this->site_security->_verify_hash($pword, $pword_on_table);
 
+    if ($result==TRUE) {
+        return TRUE;
+    } else {
+        $this->form_validation->set_message('username_check', $error_msg);
+        return FALSE;
+    }
+}
 }

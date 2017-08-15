@@ -7,6 +7,12 @@ function __construct()
 parent::__construct();
 }
 
+function _get_cookie_name()
+{
+    $cookie_name = 'tomamfowmo';
+    return $cookie_name;
+}
+
 function _get_dollar_symbol(){
     //return the segment for the store_items pages (product url)
     $symbol = "&dollar;";

@@ -21,8 +21,7 @@ $form_location = base_url().'youraccount/submit';
       <h2>New User Signup!</h2>
       <form action="<?= $form_location ?>" method="post">
         <input id="textinput" type="text" name="username" placeholder="Username" value="<?= $username ?>"/>
-        <?php echo form_error('username','<p style="color:red; display:inline-block;">','</p>'); ?>
-        <input id="textinput" type="email" name="email" placeholder="Email Address" value="<?= $email ?>"/>
+      <?php echo form_error('username','<p style="color:red; display:inline-block;">','</p>'); ?>      <input id="textinput" type="email" name="email" placeholder="Email Address" value="<?= $email ?>"/>
         <?php echo form_error('email','<p style="color:red; display:inline-block;">','</p>'); ?>
         <input type="password" name="pword" placeholder="Password" value="<?= $pword ?>"/>
         <?php echo form_error('pword','<p style="color:red; display:inline-block;">','</p>'); ?>

@@ -1,5 +1,6 @@
 <?php
-$form_location = base_url().'youraccount/submit_login';
+$first_bit = $this->uri->segment(1);
+$form_location = base_url().$first_bit.'/submit_login';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,13 +62,16 @@ $form_location = base_url().'youraccount/submit_login';
 					<div class="col-sm-4 col-sm-offset-1">
 						<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
-						<form action="" method="post">
-							<input type="text" placeholder="Username" />
-							<input type="password" placeholder="Password" />
+						<form action="<?= $form_location ?>" method="post">
+							<input type="text" name="username" value="<?= $username ?>" placeholder="Username or E-mail Address" id="inputtext"/>
+							<input type="password" name="pword" id="inputPassword" placeholder="Password" required/>
 							<span>
-								<input type="checkbox" class="checkbox" value="remember-me"> Remember me
+							<?php
+							if ($first_bit=='youraccount') {?>
+								<input type="checkbox" class="checkbox" value="remember-me" name="remember"> Remember me
 							</span>
-							<!-- <button type="submit" class="btn btn-default" name="signup" value="Signup">Login</button> -->
+							<?php }?>
+							<button type="submit" class="btn btn-default" name="submit" value="Submit">Login</button>
 						</form>
 						</div><!--/login form-->
 					</div>
