@@ -82,7 +82,7 @@ $submit = $this->input->post('submit', TRUE);
             $col1 = 'username';
             $value1 = $this->input->post('username', TRUE);
             $col2 = 'email';
-            $value2 = $this->input->post('email', TRUE);
+            $value2 = $this->input->post('username', TRUE);
             $query = $this->store_accounts->get_with_double_condition($col1, $value1, $col2, $value2);
             foreach ($query->result() as $row) {
                 $user_id = $row->id;

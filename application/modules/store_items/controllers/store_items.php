@@ -161,7 +161,7 @@ function delete_image($update_id)
     $data['big_pic'] = "";
     $data['small_pic'] = "";
     $this->_update($update_id, $data);
-    redirect('Store_items/create/'.$update_id);
+    redirect('store_items/create/'.$update_id);
     $flash_msg = "The item Image was seuccessfully Delete.";
     $value = '<div class="alert alert-success" role="alert">'.$flash_msg.'</div>';
     $this->session->set_flashdata('item', $value);
@@ -202,9 +202,9 @@ function do_upload($update_id)
     
     $config['upload_path']          = './big_pics/';
     $config['allowed_types']        = 'gif|jpg|png';
-    $config['max_size']             = 2048;
+    $config['max_size']             = 4500;
     $config['max_width']            = 2024;
-    $config['max_height']           = 768;
+    $config['max_height']           = 1024;
 
     $this->load->library('upload', $config);
 
@@ -238,7 +238,7 @@ function do_upload($update_id)
         $data['view_file'] = "upload_success";
         $this->load->module('templates');
         $this->templates->admin($data);
-        redirect('store_items/manage');
+        redirect('store_items/create/'.$update_id);
     }
 }
 

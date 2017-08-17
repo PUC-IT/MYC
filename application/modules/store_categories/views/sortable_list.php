@@ -39,7 +39,7 @@
 		} 
 		$sub_cat_url = base_url()."store_categories/manage/".$row->id;
 		?>
-		<a class="btn btn-defualt" href="<?= $sub_cat_url?>">
+		<a class="btn btn-defualt" href="<?= $sub_cat_url ?>">
 			<i class="halflings-icon white zoom-in"></i>
 			<?php echo $num_sub_cats." ".$entity; ?>
 		</a>

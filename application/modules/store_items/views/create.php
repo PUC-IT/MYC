@@ -41,6 +41,7 @@ if (is_numeric($update_id))
 ?>
 
 
+
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header" data-original-title>
@@ -121,10 +122,24 @@ if ($big_pic!="") { ?> -->
 			</div>
 		</div>
 		<div class="box-content">
-			<img src="<?= base_url() ?>assets/images/big_pics/<?= $big_pic ?>">
+			<img src="<?= base_url() ?>big_pics/<?= $big_pic ?>">
 		</div>
 	</div><!--/span-->
 </div><!--/row-->
 <!-- <?php
 }
 ?> -->
+
+
+<div id="" class="tabs-panel">
+<input type="hidden" name=" value="0">
+<ul id="categorychecklist" data-wp-lists="list:category" class="categorychecklist form-no-clear">
+				
+<li id="$cat_id">
+<label class="selectit">
+<input value="" type="checkbox" name="" id=""> Laptop
+</label>
+</li>
+
+</ul>
+</div>

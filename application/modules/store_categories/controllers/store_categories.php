@@ -102,7 +102,7 @@ function _get_all_sub_cats_for_dropdown(){
     $query = $this->_custom_query($mysql_query);
     foreach ($query->result() as $row) {
         $parent_cat_title = $this->_get_cat_title($row->parent_cat_id);
-        $sub_categories[$row->id] = $parent_cat_title.">".$row->cat_title;
+        $sub_categories[$row->id] = $parent_cat_title." > ".$row->cat_title;
     }
     if (!isset($sub_categories)) {
         $sub_categories = "";

@@ -25,7 +25,7 @@ if (isset($flash))
 		<div class="box-content">
 
 		<?php
-			echo Modules::run('store_categories/_draw_sortable_list', $parent_cat_id);
+			echo Modules::run('store_categories/_draw_sortable_list',  $parent_cat_id);
 		?>
 		
 
