@@ -9,12 +9,16 @@ $item_price = $row->item_price;
 $small_pic_path = base_url()."small_pics/".$small_pic;
 $item_page = base_url().$item_segments."/".$row->item_url;
 ?>
-<div class="col-md-2 img-thumbnail" style="margin: 6px; height: 350px;">
+<div class="col-md-2 img-thumbnail" style="margin: 6px; height: auto;">
 	<a href="<?= $item_page ?>"><img src="<?= $small_pic_path ?>" alt="<?= $item_title ?>" class="img-responsive"></a>
 	<br>
 	<h6><a href="<?= $item_page ?>"><?= $item_title  ?></a></h6>
 	<div style="clear: both; color:red; font-weight: bold;"><?= $dollar_symbol.number_format($item_price,2) ?>.0
-	<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+	
+<!-- 	<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a> -->
+	<div class="col-md-2">
+		<?= Modules::run('cart/_draw_add_to_cart', $update_id) ?>
+	</div>
 	
 	</div>
 </div>

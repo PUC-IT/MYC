@@ -66,9 +66,9 @@
 <hr>
       <div class="container" style="min-height: 450px;">
           <?php
-            // if ($customer_id>0) {
-            //   include('');
-            // }
+            if ($customer_id>0) {
+              include('customer_panel_top.php');
+            }
 
             if (isset($page_content)) {
               echo nl2br($page_content);

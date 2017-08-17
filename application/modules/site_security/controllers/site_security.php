@@ -11,7 +11,7 @@ parent::__construct();
 
 function _check_admin_login_details($username, $pword){
 
-	$target_username = "amdin";
+	$target_username = "admin";
 	$target_pass	= "password";
 
 	if (($username==$target_username) && ($pword==$target_pass)) {
@@ -70,9 +70,10 @@ function _verify_hash($plain_text_str, $hash_string)
 
 function _make_sure_is_admin()
 {
-    $is_admin = TRUE;
-    if ($is_admin!=TRUE)
-    {
+	$is_admin = $this->session->userdata('is_admin');
+    if ($is_admin==1) {
+        return TRUE;
+    } else {
         redirect('site_security/not_allowed');
     }
 }

@@ -161,7 +161,7 @@
 										<span>Account Settings</span>
 									</li>
 									<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-									<li><a href="login.html"><i class="halflings-icon off"></i> Logout</a></li>
+									<li><a href="<?= base_url().'iloveu/logout' ?>"><i class="halflings-icon off"></i> Logout</a></li>
 								</ul>
 							</li>
 							<!-- end: User Dropdown -->
@@ -181,7 +181,7 @@
 				<div id="sidebar-left" class="span2">
 					<div class="nav-collapse sidebar-nav">
 						<ul class="nav nav-tabs nav-stacked main-menu">
-							<li><a href="<?= base_url()?>store_items/home"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+							<li><a href="<?= base_url()?>dashboard/home"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>
 							<li><a href="<?= base_url()?>store_items/manage"><i class="icon-tag"></i><span class="hidden-tablet"> Manage Products</span></a></li>
 							<li><a href="<?= base_url()?>store_categories/manage"><i class="icon-tasks"></i><span class="hidden-tablet"> Manage Categories</span></a></li>
 							<li><a href="<?= base_url()?>store_accounts/manage"><i class="icon-briefcase"></i><span class="hidden-tablet"> Manage Accounts</span></a></li>

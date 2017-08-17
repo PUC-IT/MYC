@@ -1,2 +1,4 @@
+<?php
 
-<?php echo anchor('youraccount/logout', 'Logout'); ?>
+	echo Modules::run('');
+?>

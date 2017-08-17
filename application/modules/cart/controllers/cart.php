@@ -7,6 +7,46 @@ function __construct()
 parent::__construct();
 }
 
+function index()
+{
+    $data['flash'] = $this->session->flashdata('item');
+    $data['view_file'] = "cart";
+    $session_id = $this->session->session_id;
+    $this->load->module('site_security');
+    $shopper_id = $this->site_security->_get_user_id();
+    if (!is_numeric($shopper_id)) {
+        $shopper_id = 0;
+    }
+    $table = 'store_basket';
+    $data['query'] = $this->_fetch_cart_content($session_id, $shopper_id, $table);
+    //count the number of items in cart
+    $data['num_rows'] = $data['query']->num_rows();
+    $this->load->module('templates');
+    $this->templates->public_bootstrap($data);
+}
+
+function _get_showing_statement($num_rows)
+{
+    if ($num_rows==1) {
+        $showing_statement = "You have one item in your shopping cart.";
+    } else {
+        $showing_statement = "You have ".$num_rows." items in your shopping cart.";
+    }
+}
+
+function _fetch_cart_content($session_id, $shopper_id, $table)
+{
+    $this->load->module('store_basket');
+    if ($shopper_id>0) {
+        $mysql_query = "select * from $table where shopper_id=$shopper_id";
+    } else {
+        $mysql_query = "select * from $table where session_id=$session_id";
+    }
+    $query = $this->store_basket->_custom_query($mysql_query);
+    return $query;
+
+}
+
 function _draw_add_to_cart($item_id)
 {
     //fetch color option for item

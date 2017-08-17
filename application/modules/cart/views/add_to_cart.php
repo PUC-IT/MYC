@@ -1,4 +1,9 @@
 <div style="margin-top: 25px; background-color: #ddd; border-radius: 7px; padding: 7px;">
+
+<?php
+echo form_open('store_basket/add_to_basket');
+?>
+
 	<table class="table">
 		<tr>
 			<td>Item ID :</td>
@@ -12,7 +17,7 @@
 			<td>
 				<?php
 					$additional_dd_code = 'class="form-control"';
-					echo form_dropdown('status', $color_options, $submitted_color, $additional_dd_code);
+					echo form_dropdown('item_color', $color_options, $submitted_color, $additional_dd_code);
 				?>
 			</td>
 		</tr>
@@ -27,7 +32,7 @@
 			<td>
 				<?php
 					$additional_dd_code = 'class="form-control"';
-					echo form_dropdown('status', $size_options, $submitted_size, $additional_dd_code);
+					echo form_dropdown('item_size', $size_options, $submitted_size, $additional_dd_code);
 				?>
 			</td>
 		</tr>
@@ -36,10 +41,10 @@
 		?>
 
 		<tr>
-			<td>Quantity :</td>
+			<td>QTY :</td>
 			<td>
 				<div class="col-sm-5" style="padding-left: 0px;">
-					<input type="text" class="form-control">
+					<input name="item_qty" type="text" class="form-control" placeholder="01">
 				</div>
 			</td>
 
@@ -51,9 +56,14 @@
 		
 		<tr>
 			<td colspan="2" style="text-align: center;">
-				<button type="submit" class="btn btn-primary" aria-hidden="true"><span class=" glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
+				<button type="submit" name="submit" value="Submit" class="btn btn-primary" aria-hidden="true"><span class=" glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
 			</td>
 			
 		</tr>
 	</table>
+
+	<?php
+	echo form_hidden('item_id', $item_id);
+	echo form_close();
+	?>
 </div>

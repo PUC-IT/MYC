@@ -1,3 +1,9 @@
+<?php
+if (isset($flash)) {
+	echo $flash;
+}
+?>
+
 <div class="row">
 	<div class="col-md-5" style="margin-top: 25px;">
 		<img src="<?= base_url() ?>big_pics/<?= $big_pic ?>" class="img-responsive" alt="Responsive image">
