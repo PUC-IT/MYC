@@ -7,6 +7,19 @@ function __construct()
 parent::__construct();
 }
 
+function _draw_cart_contents($query, $user_type)
+{
+    $this->load->module('site_setting');
+    $data['currency_symbol'] = $this->site_setting->_get_dollar_symbol();
+    if ($user_type=='public') {
+        $view_file = 'cart_contents_public';
+    } else {
+        $view_file = 'cart_contents_admin';
+    }
+    $data['query'] = $query;
+    $this->load->view($view_file, $data);
+}
+
 function index()
 {
     $data['flash'] = $this->session->flashdata('item');
@@ -21,27 +34,41 @@ function index()
     $data['query'] = $this->_fetch_cart_content($session_id, $shopper_id, $table);
     //count the number of items in cart
     $data['num_rows'] = $data['query']->num_rows();
+    $data['showing_statement'] = $this->_get_showing_statement($data['num_rows']);
     $this->load->module('templates');
     $this->templates->public_bootstrap($data);
 }
 
-function _get_showing_statement($num_rows)
+function _get_showing_statement($num_items)
 {
-    if ($num_rows==1) {
+    if ($num_items==1) {
         $showing_statement = "You have one item in your shopping cart.";
     } else {
-        $showing_statement = "You have ".$num_rows." items in your shopping cart.";
+        $showing_statement = "You have ".$num_items." items in your shopping cart.";
     }
+    return $showing_statement;
 }
 
 function _fetch_cart_content($session_id, $shopper_id, $table)
 {
     $this->load->module('store_basket');
+    $mysql_query = "
+    SELECT
+        store_basket.item_title,
+        store_basket.price,
+        store_basket.item_qty,
+        store_items.item_url,
+        store_items.small_pic,
+        store_basket.item_decription
+        FROM store_basket LEFT JOIN store_items ON store_basket.item_id = store_items.id
+    ";
+
     if ($shopper_id>0) {
-        $mysql_query = "select * from $table where shopper_id=$shopper_id";
+        $where_condition = "WHERE store_basket.shopper_id=$shopper_id";
     } else {
-        $mysql_query = "select * from $table where session_id=$session_id";
+        $where_condition = "WHERE store_basket.session_id='$session_id'";
     }
+    $mysql_query.=$where_condition;
     $query = $this->store_basket->_custom_query($mysql_query);
     return $query;
 

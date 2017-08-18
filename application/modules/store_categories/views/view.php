@@ -16,10 +16,8 @@ $item_page = base_url().$item_segments."/".$row->item_url;
 	<div style="clear: both; color:red; font-weight: bold;"><?= $dollar_symbol.number_format($item_price,2) ?>.0
 	
 <!-- 	<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a> -->
-	<div class="col-md-2">
 		<?= Modules::run('cart/_draw_add_to_cart', $update_id) ?>
-	</div>
-	
+
 	</div>
 </div>
 
