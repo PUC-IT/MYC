@@ -10,6 +10,7 @@ if (isset($flash)) {
 	</div>
 	<div class="col-md-4">
 		<h1><?= $item_title ?></h1>
+		<h2 style="color:red;">Price: <?= $currency_symbol.$item_price_desc ?></h2>
 		<div style="clear: both;">
 			<?= nl2br($item_description) ?>
 		</div>

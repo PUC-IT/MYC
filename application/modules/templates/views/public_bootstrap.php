@@ -48,7 +48,8 @@
           ?>
 
         
-          <?php echo anchor('youraccount/start', 'Create Account'); ?>
+          <?php echo anchor('youraccount/start', 'Create Account'); ?><br>
+          <?php echo anchor('cart/', 'View cart'); ?>
           </div><!--/.navbar-collapse -->
         </div>
       </nav>

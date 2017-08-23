@@ -4,10 +4,11 @@
 		<thead class="cart_menu">
 			<tr>
 				<td class="col-md-2">Items</td>
-				<td class="col-md-4">Product Detail</td>
-				<td class="col-md-1">Price</td>
-				<td class="col-md-1">QTY</td>
+				<td class="col-md-3">Product Detail</td>
+				<td class="col-md-2">Price</td>
+				<td class="col-md-2">QTY</td>
 				<td class="col-md-2">Sub Total</td>
+				<td class="col-md-1">Remove</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,6 +20,7 @@
 				$sub_total_desc = number_format($sub_total, 2);
 				$grand_total = $grand_total+$sub_total;
 				$item_total = $item_total+$row->item_qty;
+				
 			?>
 			<tr style="vertical-align: inherit;">
 				<td class="col-md-2">
@@ -30,11 +32,10 @@
 					}
 					?>						
 				</td>
-				<td class="col-md-4" style="vertical-align: inherit;">
+				<td class="col-md-3" style="vertical-align: inherit;">
 					<a href=""><?= $row->item_title ?></a>
-					<p><?= $row->item_description ?></p>
 				</td>
-				<td class="col-md-1" style="vertical-align: inherit;">
+				<td class="col-md-2" style="vertical-align: inherit;">
 					<?= $currency_symbol.$row->price ?>
 				</td>
 				<td class="col-md-2" style="vertical-align: inherit;">
@@ -47,8 +48,10 @@
 				<td class="col-md-2" style="text-align: center; vertical-align: inherit;">
 					<?= $currency_symbol.$sub_total_desc ?>
 				</td>
-				<td style="vertical-align: inherit;">
-					<a class="button" href=""><i class="fa fa-times"></i></a>
+				<td class="col-md-1" style="vertical-align: inherit;">
+					<a class="btn btn-danger" href="<?= base_url().'store_basket/remove/'.$row->id ?>">
+						<i class="glyphicon glyphicon-remove"></i>
+					</a>
 				</td>
 			</tr>
 			<?php } ?>

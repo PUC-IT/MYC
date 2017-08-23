@@ -8,6 +8,41 @@ parent::__construct();
 
 }
 
+function remove()
+{
+    $update_id = $this->uri->segment(3);
+    $allowed = $this->_make_sure_remove_allowed($update_id);
+    if ($allowed==FALSE) {
+        redirect('cart');
+    }
+    
+    $update_id = $this->uri->segment(3);
+    $this->_delete($update_id);
+    redirect('cart');
+}
+
+function _make_sure_remove_allowed($update_id)
+{
+    $query = $this->get_where($update_id);
+    foreach ($query->result() as $row) {
+        $session_id = $row->session_id;
+        $shopper_id = $row->shopper_id;
+    }
+
+    if (!isset($shopper_id)) {
+        return FALSE;
+    }
+
+    $customer_session_id = $this->session->session_id;
+    $this->load->module('site_security');
+    $customer_shopper_id = $this->site_security->_get_user_id();
+
+    if (($session_id==$customer_session_id) OR ($shopper_id==$customer_shopper_id)) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
 
 function add_to_basket()
 {

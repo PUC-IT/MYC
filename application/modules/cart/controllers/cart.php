@@ -16,6 +16,8 @@ function _draw_cart_contents($query, $user_type)
     } else {
         $view_file = 'cart_contents_admin';
     }
+
+    
     $data['query'] = $query;
     $this->load->view($view_file, $data);
 }
@@ -54,19 +56,16 @@ function _fetch_cart_content($session_id, $shopper_id, $table)
     $this->load->module('store_basket');
     $mysql_query = "
     SELECT
-        store_basket.item_title,
-        store_basket.price,
-        store_basket.item_qty,
+        $table.*,
         store_items.item_url,
-        store_items.small_pic,
-        store_basket.item_decription
-        FROM store_basket LEFT JOIN store_items ON store_basket.item_id = store_items.id
+        store_items.small_pic
+        FROM $table LEFT JOIN store_items ON $table.item_id = store_items.id
     ";
 
     if ($shopper_id>0) {
-        $where_condition = "WHERE store_basket.shopper_id=$shopper_id";
+        $where_condition = "WHERE $table.shopper_id=$shopper_id";
     } else {
-        $where_condition = "WHERE store_basket.session_id='$session_id'";
+        $where_condition = "WHERE $table.session_id='$session_id'";
     }
     $mysql_query.=$where_condition;
     $query = $this->store_basket->_custom_query($mysql_query);

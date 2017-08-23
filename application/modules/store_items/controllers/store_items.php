@@ -27,10 +27,16 @@ function view($update_id)
     {
         redirect('site_security/not_allowed');
     }
+    $this->load->module('site_setting');
 
     //fetch item detail
     $data = $this->fetch_data_from_db($update_id);
     $data['update_id'] = $update_id;
+
+    $data['item_price_desc'] = number_format($data['item_price'], 2);
+    $data['item_price_desc'] = str_replace('.00', '', $data['item_price_desc']);
+
+    $data['currency_symbol'] = $this->site_setting->_get_dollar_symbol();
     $data['flash'] = $this->session->flashdata('item');
     $data['view_module'] = "store_items";
     $data['view_file'] = "view";
