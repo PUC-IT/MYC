@@ -34,6 +34,7 @@
 				</td>
 				<td class="col-md-3" style="vertical-align: inherit;">
 					<a href=""><?= $row->item_title ?></a>
+					<p><?= $row->item_description ?></p>
 				</td>
 				<td class="col-md-2" style="vertical-align: inherit;">
 					<?= $currency_symbol.$row->price ?>

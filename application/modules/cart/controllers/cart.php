@@ -17,7 +17,6 @@ function _draw_cart_contents($query, $user_type)
         $view_file = 'cart_contents_admin';
     }
 
-    
     $data['query'] = $query;
     $this->load->view($view_file, $data);
 }
@@ -58,7 +57,8 @@ function _fetch_cart_content($session_id, $shopper_id, $table)
     SELECT
         $table.*,
         store_items.item_url,
-        store_items.small_pic
+        store_items.small_pic,
+        store_items.item_description
         FROM $table LEFT JOIN store_items ON $table.item_id = store_items.id
     ";
 
