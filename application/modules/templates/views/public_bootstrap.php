@@ -39,7 +39,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<?= base_url() ?>">Home</a>
+          <a class="navbar-brand" href="<?= base_url() ?>"><i class="glyphicon glyphicon-home"></i> Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
@@ -53,17 +53,7 @@
           </div><!--/.navbar-collapse -->
         </div>
       </nav>
-<!-- <div class="col-sm-8">
-            <div class="shop-menu pull-right">
-              <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                <li><a href="<?= base_url() ?>youraccount/login/"><i class="fa fa-lock"></i> Login</a></li>
-              </ul>
-            </div>
-          </div> -->
+
 <hr>
       <div class="container" style="min-height: 450px;">
           <?php
@@ -73,6 +63,9 @@
 
             if (isset($page_content)) {
               echo nl2br($page_content);
+              if (!isset($page_url)) {
+                $page_url = 'homepage';
+              }
               if ($page_url=="") {
                 require_once('homepage_content.php');
               } elseif ($page_url=="contact-us")

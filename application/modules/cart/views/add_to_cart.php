@@ -6,14 +6,14 @@ echo form_open('store_basket/add_to_basket');
 
 	<table class="table">
 		<tr>
-			<td>Item ID :</td>
+			<td>ID:</td>
 			<td><?= $item_id ?></td>
 		</tr>
 
 		<?php
 		if ($num_colors>0) { ?>
 		<tr>
-			<td>Color :</td>
+			<td>Color:</td>
 			<td>
 				<?php
 					$additional_dd_code = 'class="form-control"';
@@ -28,7 +28,7 @@ echo form_open('store_basket/add_to_basket');
 		<?php
 		if ($num_sizes>0) { ?>
 		<tr>
-			<td>Size :</td>
+			<td>Size:</td>
 			<td>
 				<?php
 					$additional_dd_code = 'class="form-control"';
@@ -41,9 +41,9 @@ echo form_open('store_basket/add_to_basket');
 		?>
 
 		<tr>
-			<td>QTY :</td>
+			<td>QTY:</td>
 			<td>
-				<div class="col-sm-5" style="padding-left: 0px;">
+				<div class="col-sm-6" style="padding-left: 0px;">
 					<input name="item_qty" type="text" class="form-control" placeholder="01">
 				</div>
 			</td>

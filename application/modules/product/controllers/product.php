@@ -7,7 +7,7 @@ function __construct()
 parent::__construct();
 }
 
-function items(){
+function index(){
     //figure out what the item id is
     $item_url = $this->uri->segment(3);
     $this->load->module('store_items');

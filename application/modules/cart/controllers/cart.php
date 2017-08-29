@@ -7,9 +7,50 @@ function __construct()
 parent::__construct();
 }
 
+function submit_choice()
+{
+    $submit = $this->input->post('submit', TRUE);
+    if ($submit=="No, Thanks") {
+        
+    } elseif ($submit=="Yes, Let's Do") {
+        redirect('youraccount/start');
+    } 
+}
+
+function continue_checkout()
+{
+    $this->load->module('site_security');
+    $shopper_id = $this->site_security->_get_user_id();
+    if (is_numeric($shopper_id)) {
+        redirect('cart');
+    }
+    $data['flash'] = $this->session->flashdata('item');
+    $data['view_file'] = "continue_checkout";
+    $this->load->module('templates');
+    $this->templates->public_bootstrap($data);
+}
+
+function _attempt_draw_checkout_btn($query)
+{
+    $data['query'] = $query;
+    $this->load->module('site_security');
+    $shopper_id = $this->site_security->_get_user_id();
+    if (!is_numeric($shopper_id)) {
+        $this->_draw_checkout_btn_fake();
+    } else {
+        $this->_draw_checkout_btn_real($query);
+    }
+}
+
+function _draw_checkout_btn_fake()
+{
+    $this->load->view('checkout_btn_fake');
+}
 function _draw_cart_contents($query, $user_type)
 {
     $this->load->module('site_setting');
+    $this->load->module('shipping');
+    $data['item_segments'] = $this->site_setting->_get_items_segments();
     $data['currency_symbol'] = $this->site_setting->_get_dollar_symbol();
     if ($user_type=='public') {
         $view_file = 'cart_contents_public';
@@ -17,6 +58,7 @@ function _draw_cart_contents($query, $user_type)
         $view_file = 'cart_contents_admin';
     }
 
+    $data['shipping'] = $this->shipping->_get_shipping();
     $data['query'] = $query;
     $this->load->view($view_file, $data);
 }
@@ -109,5 +151,13 @@ function _draw_add_to_cart($item_id)
     $data['item_id'] = $item_id;
     $this->load->view('add_to_cart', $data);
 }
+
+
+
+
+
+
+
+
 
 }

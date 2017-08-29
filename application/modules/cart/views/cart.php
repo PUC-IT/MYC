@@ -6,6 +6,8 @@ if ($num_rows<1) {
 } else {
 	echo "<p>".$showing_statement."</p>";
 	$user_type = 'public';
+	echo Modules::run('cart/_attempt_draw_checkout_btn', $query);
 	echo Modules::run('cart/_draw_cart_contents', $query, $user_type);
+	
 }
 ?>

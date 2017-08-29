@@ -7,7 +7,7 @@ function __construct()
 parent::__construct();
 }
 
-function product(){
+function index(){
     //figure out what the category id is
     $cat_url = $this->uri->segment(3);
     $this->load->module('store_categories');

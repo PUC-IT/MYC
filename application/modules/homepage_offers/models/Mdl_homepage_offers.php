@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Mdl_perfectmodel extends CI_Model
+class Mdl_homepage_offers extends CI_Model
 
 {
 
@@ -10,7 +10,7 @@ parent::__construct();
 
 function get_table() 
 {
-    $table = "tablename";
+    $table = "homepage_offers";
     return $table;
 }
 
@@ -43,6 +43,7 @@ function get_where_custom($col, $value)
 {
     $table = $this->get_table();
     $this->db->where($col, $value);
+    $this->db->order_by('item_id');
     $query=$this->db->get($table);
     return $query;
 }

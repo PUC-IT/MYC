@@ -9,6 +9,26 @@ $this->load->library('form_validation');
 $this->form_validation->CI =& $this;
 }
 
+// function _get_sub_cat_id($update_id)
+// {
+//     $refer_url = $_SERVER['HTTP_REFERER'];
+
+//     $this->load->module('site_setting');
+//     $this->load->module('store_cat_assign');
+//     $this->load->module('store_categories');
+
+//     $item_segments = $this->site_setting->_get_items_segments();
+//     $ditch_this = base_url().$item_segments;
+//     $cat_url = str_replace($ditch_this, '', $refer_url);
+//     $sub_cat_id = $this->store_categories->_get_cat_id_from_cat_url($cat_url);
+//     if ($sub_cat_id>0) {
+//         return $sub_cat_id;
+//     } else {
+//         $sub_cat_id = $this->_get_best_sub_cat_id($update_id);
+//     }
+//     return $sub_cat_id;
+// }
+
 function _get_item_id_from_item_url($item_url)
 {
     $query = $this->get_where_custom('item_url', $item_url);

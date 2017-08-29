@@ -8,6 +8,73 @@ parent::__construct();
 
 }
 
+
+function update() {
+        $product_id = $this->input->post('product_id');
+        $qty = $this->input->post('qty');
+        
+        $count_arr = count($product_id);
+        for($i=0;$i<$count_arr;$i++){
+            $update_id = array();
+            if($this->session->userdata('session_id')){
+                $session_id = $this->session->userdata('session_id');
+                    foreach($session_id as $id=>$val){
+                        $update_id[$id] = $val;
+                    }
+            } 
+            if($qty[$i] == 0){
+                $qty_add = 1;
+            } else {
+                $qty_add = $qty[$i];
+            }
+    
+            $update_id[$update_id[$i]] = $qty_add;
+            $this->session->set_userdata('session_id',$update_id);
+            }
+        
+            $session_id = $this->session->userdata('session_id');
+        
+            $arr = array();
+            $arr['update_cart'] = array_sum($session_id);
+            echo json_encode($arr);
+    }
+    
+
+function empty_cart() {
+        
+            $this->session->unset_userdata('session_id');
+            
+            $arr = array();
+            $arr['update_cart'] = 0;
+            echo json_encode($arr);
+        
+        
+    }
+function delete() {
+        
+        $update_id = array();
+    
+        if($this->session->userdata('session_id')){
+        
+            $session_id = $this->session->userdata('session_id');
+        
+            foreach($session_id as $id=>$val){
+                if($this->input->post('product_id') == $id){
+                
+                } else {
+                    $update_id[$id] = $val;
+                }
+            }
+        
+        }
+        $this->session->set_userdata('session_id',$update_id);
+            
+        $session_id = $this->session->userdata('session_id');
+        $arr = array();
+        $arr['update_cart'] = array_sum($session_id);
+        echo json_encode($arr);
+    }
+
 function remove()
 {
     $update_id = $this->uri->segment(3);

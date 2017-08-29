@@ -20,12 +20,12 @@ function _get_dollar_symbol(){
 }
 function _get_items_segments(){
     //return the segment for the store_items pages (product url)
-    $segments = "product/items";
+    $segments = "product/index";
     return $segments;
 }
 function _get_cat_segments(){
     //return the segment for the store_items pages (product url)
-    $segments = "category/product/";
+    $segments = "category/index/";
     return $segments;
 }
 

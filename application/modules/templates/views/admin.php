@@ -185,7 +185,7 @@
 							<li><a href="<?= base_url()?>store_items/manage"><i class="icon-tag"></i><span class="hidden-tablet"> Manage Products</span></a></li>
 							<li><a href="<?= base_url()?>store_categories/manage"><i class="icon-tasks"></i><span class="hidden-tablet"> Manage Categories</span></a></li>
 							<li><a href="<?= base_url()?>store_accounts/manage"><i class="icon-briefcase"></i><span class="hidden-tablet"> Manage Accounts</span></a></li>
-							
+							<li><a href="<?= base_url()?>homepage_blocks/manage"><i class="icon-star"></i><span class="hidden-tablet"> Homepage_block</span></a></li>
 							<li><a href="<?= base_url()?>webpages/manage"><i class="icon-eye-open"></i><span class="hidden-tablet"> CMS Blog</span></a></li>
 							<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>
 							<li>
