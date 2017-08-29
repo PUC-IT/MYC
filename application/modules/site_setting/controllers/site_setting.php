@@ -7,10 +7,21 @@ function __construct()
 parent::__construct();
 }
 
+function _get_paypla_email()
+{
+    $email = 'choutola27-facilitator@gmail.com';
+    return $email;
+}
+
 function _get_cookie_name()
 {
     $cookie_name = 'tomamfowmo';
     return $cookie_name;
+}
+
+function _get_currency_code(){
+    $code = "USD";
+    return $code;
 }
 
 function _get_dollar_symbol(){
@@ -18,6 +29,7 @@ function _get_dollar_symbol(){
     $symbol = "&dollar;";
     return $symbol;
 }
+
 function _get_items_segments(){
     //return the segment for the store_items pages (product url)
     $segments = "product/index";

@@ -7,11 +7,88 @@ function __construct()
 parent::__construct();
 }
 
+function _check_and_get_session_id($checkout_token)
+{
+    $session_id = $this->_get_session_id_from_token($checkout_token);
+    if ($session_id=='') {
+        redirect(base_url());
+    }
+
+    //check to see if this session ID Appears on store_basket
+    $this->load->module('store_basket');
+    $query = $this->store_basket->get_where_custom('session_id', $session_id);
+    $num_rows = $query->num_rows();
+
+    if ($num_rows<1) {
+        redirect(base_url());
+    }
+    return $session_id;
+}
+
+function _create_checkout_token($session_id)
+{
+    $this->load->module('site_security');
+    $encrypted_string = $this->site_security->_encrypt_string($session_id);
+    //remove dodgy character
+    $checkout_token = str_replace('+', '-plus-', $encrypted_string);
+    $checkout_token = str_replace('/', '-fwrd-', $checkout_token);
+    $checkout_token = str_replace('=', '-eqls-', $checkout_token);
+
+    return $checkout_token;
+}
+
+function _get_session_id_from_token($checkout_token)
+{
+    $this->load->module('site_security');
+    $session_id = str_replace('-plus-', '+', $checkout_token);
+    $session_id = str_replace('-fwrd-', '/', $session_id);
+    $session_id = str_replace('-eqls-', '=', $session_id);
+
+    $session_id = $this->site_security->_decrypt_string($session_id);
+    return $session_id;
+}
+
+function test()
+{
+    $string = "HEllo tola blue";
+    $this->load->module('site_security');
+    $encrypted_string = $this->site_security->_encrypt_string($string);
+    $decrypted_string = $this->site_security->_decrypt_string($encrypted_string);
+
+    echo "string is $string<hr>";
+    echo "En--string is $encrypted_string<hr>";
+    echo "De--string is $decrypted_string<hr>";
+
+}
+function test1()
+{
+    $string = "HEllo tola blue";
+    $this->load->module('site_security');
+
+    $third_bit = $this->uri->segment(3);
+    if ($third_bit!='') {
+        $encrypted_string = $third_bit;
+    }   else {
+        $encrypted_string = $this->site_security->_encrypt_string($string);
+    }
+ 
+    $decrypted_string = $this->site_security->_decrypt_string($encrypted_string);
+
+    echo "string is $string<hr>";
+    echo "En--string is $encrypted_string<hr>";
+    echo "De--string is $decrypted_string<hr>";
+
+    $new_encrypted_string = $this->site_security->_encrypt_string($string);
+    echo anchor('cart/test1/'.$new_encrypted_string, 'Reload');
+
+}
+
 function submit_choice()
 {
     $submit = $this->input->post('submit', TRUE);
     if ($submit=="No, Thanks") {
-        
+        $checkout_token = $this->input->post('checkout_token', TRUE);
+        redirect('cart/index/'.$checkout_token);
     } elseif ($submit=="Yes, Let's Do") {
         redirect('youraccount/start');
     } 
@@ -24,6 +101,7 @@ function continue_checkout()
     if (is_numeric($shopper_id)) {
         redirect('cart');
     }
+    $data['checkout_token'] = $this->uri->segment(3);
     $data['flash'] = $this->session->flashdata('item');
     $data['view_file'] = "continue_checkout";
     $this->load->module('templates');
@@ -35,17 +113,30 @@ function _attempt_draw_checkout_btn($query)
     $data['query'] = $query;
     $this->load->module('site_security');
     $shopper_id = $this->site_security->_get_user_id();
-    if (!is_numeric($shopper_id)) {
-        $this->_draw_checkout_btn_fake();
+    $third_bit = $this->uri->segment(3);
+
+    if ((!is_numeric($shopper_id)) AND ($third_bit=='')) {
+        $this->_draw_checkout_btn_fake($query);
     } else {
         $this->_draw_checkout_btn_real($query);
     }
 }
 
-function _draw_checkout_btn_fake()
+function _draw_checkout_btn_fake($query)
 {
-    $this->load->view('checkout_btn_fake');
+    foreach ($query->result() as $row) {
+        $session_id = $row->session_id;
+    }
+    $data['checkout_token'] = $this->_create_checkout_token($session_id);
+    $this->load->view('checkout_btn_fake', $data);
 }
+
+function _draw_checkout_btn_real($query)
+{
+    $this->load->module('paypal');
+    $this->paypal->_draw_checkout_btn($query);
+}
+
 function _draw_cart_contents($query, $user_type)
 {
     $this->load->module('site_setting');
@@ -67,7 +158,14 @@ function index()
 {
     $data['flash'] = $this->session->flashdata('item');
     $data['view_file'] = "cart";
-    $session_id = $this->session->session_id;
+
+    $third_bit = $this->uri->segment(3);
+    if ($third_bit!='') {
+        $session_id = $this->_check_and_get_session_id($third_bit);
+    } else {
+        $session_id = $this->session->session_id;    
+    }
+    
     $this->load->module('site_security');
     $shopper_id = $this->site_security->_get_user_id();
     if (!is_numeric($shopper_id)) {

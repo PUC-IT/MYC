@@ -7,7 +7,19 @@ function __construct()
 parent::__construct();
 }
 
+function _encrypt_string($str)
+{
+	$this->load->library('encryption');
+	$encrypted_string = $this->encryption->encrypt($str);
+	return $encrypted_string;
+}
 
+function _decrypt_string($str)
+{
+	$this->load->library('encryption');
+	$decrypted_string = $this->encryption->decrypt($str);
+	return $decrypted_string;
+}
 
 function _check_admin_login_details($username, $pword){
 

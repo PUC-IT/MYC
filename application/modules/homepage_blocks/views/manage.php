@@ -16,7 +16,7 @@ if (isset($flash))
 <div class="row-fluid sortable">
 	<div class="box span12">
 		<div class="box-header" data-original-title>
-			<h2><a href="<?= base_url()?>homepage_blocks/manage" style="color: #fff; text-decoration-line: none;"><i class="icon-tasks"></i><span class="break">    Homepage Offer Management</span></a></h2>
+			<h2><a href="<?= base_url()?>homepage_blocks/manage" style="color: #fff; text-decoration-line: none;"><i class="icon-tasks"></i><span class="break">Homepage Offer Management</span></a></h2>
 			<div class="box-icon">
 				<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
 				<a href="#" class="btn-close"><i class="halflings-icon white home"></i></a>

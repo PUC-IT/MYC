@@ -73,7 +73,7 @@ function submit($update_id)
     $item_id = trim($this->input->post('item_id', TRUE));
 
     if ($submit=="Finish") {
-        redirect('store_items/create/'.$update_id);
+        redirect('homepage_blocks/create/'.$update_id);
     }
     elseif ($submit=="Submit")
     {

@@ -19,5 +19,8 @@ echo form_open('cart/submit_choice'); ?>
 	<button type="submit" name="submit" value="No, Thanks" class="btn btn-danger" aria-hidden="true">
 	<span class=" glyphicon glyphicon-thumbs-down"></span> No, Thanks
 	</button>
-<?php echo form_close(); ?>
+
+<?php 
+echo form_hidden('checkout_token', $checkout_token);
+echo form_close(); ?>
 </div>

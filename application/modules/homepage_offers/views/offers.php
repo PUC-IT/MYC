@@ -25,7 +25,7 @@ $item_price = str_replace('.00', '', $item_price);
 				<a href="<?= $item_page ?>"><img src="<?= $small_pic_path ?>" alt="<?= $item_title ?>" class="img-responsive"></a>
 				<h6><a href="<?= $item_page ?>"><?= $item_title  ?></a></h6>
 				
-				<a href="<?= $item_page ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Detail</a>
+				<a href="<?= $item_page ?>" class="btn btn-default btn-<?= $theme ?>" style="margin-bottom: 24px;"><i class="fa fa-shopping-cart"></i>View Detail</a>
 			</div>
 		</div>
 	</div>
